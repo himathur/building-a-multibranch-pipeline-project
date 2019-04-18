@@ -21,5 +21,17 @@ pipeline{
 			}
 		}
 
+		stage('Deploy for development') {
+			when {
+				branch 'development'
+			}
+			steps {
+				sh './jenkins/scripts/deliver-for-development.sh'
+				input message : 'Finshed using the web site? (Click proceed to continue)'
+				sh  './jenkins/scripts/kill.sh'
+			
+			}
+		}
+
 	}
 }
